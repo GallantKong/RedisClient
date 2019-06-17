@@ -18,7 +18,6 @@ public abstract class JedisCommand implements Comparable<JedisCommand>{
 	protected int id;
 	protected Server server;
 	protected Jedis jedis;
-	private ServerService service = new ServerService();
 
 	public JedisCommand(int id) {
 		super();
@@ -26,11 +25,8 @@ public abstract class JedisCommand implements Comparable<JedisCommand>{
 	}
 
 	public void execute() {
-		server = service.listById(id);
-		this.jedis = new Jedis(server.getHost(), Integer.parseInt(server.getPort()), timeout);
-		if(server.getPassword() != null && server.getPassword().length() > 0)
-			jedis.auth(server.getPassword());
-		
+		this.jedis = JedisFactory.getJedis(id);
+
 		runCommand();
 		
 		jedis.close();

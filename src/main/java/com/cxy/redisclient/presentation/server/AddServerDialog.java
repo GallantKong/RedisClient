@@ -4,6 +4,8 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -27,6 +29,8 @@ public class AddServerDialog extends RedisClientDialog {
 	protected Text text_4;
 	protected Text text_5;
 	protected Text text_6;
+	protected Button jedisClusterType;
+	protected Button jedisSentinelType;
 	/**
 	 * Create the dialog.
 	 * 
@@ -81,11 +85,36 @@ public class AddServerDialog extends RedisClientDialog {
 		text_6 = new Text(composite, SWT.BORDER | SWT.PASSWORD);
 		text_6.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		text_6.selectAll();
-		
+
+		//Composite先后实例化顺序决定了按钮的位置顺序
+		Composite jedisTypeComposite = new Composite(shell, SWT.NONE);
+		jedisTypeComposite.setLayout(new FillLayout(SWT.HORIZONTAL));
+		jedisTypeComposite.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+		jedisClusterType = new Button(jedisTypeComposite, SWT.RADIO);
+		jedisClusterType.setText("is cluster mode");
+		jedisClusterType.addSelectionListener(new SelectionAdapter() {
+			private boolean selected = true;
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				jedisClusterType.setSelection(selected);
+				selected = !selected;
+			}
+		});
+		jedisSentinelType = new Button(jedisTypeComposite, SWT.RADIO);
+		jedisSentinelType.setText("is sentinel mode");
+		jedisSentinelType.addSelectionListener(new SelectionAdapter() {
+			private boolean selected = true;
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				jedisSentinelType.setSelection(selected);
+				selected = !selected;
+			}
+		});
+
 		Composite composite_1 = new Composite(shell, SWT.NONE);
 		composite_1.setLayout(new FillLayout(SWT.HORIZONTAL));
 		composite_1.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-		
+
 		Button btnOk = new Button(composite_1, SWT.NONE);
 		btnOk.addMouseListener(new MouseAdapter() {
 			@Override
@@ -97,7 +126,10 @@ public class AddServerDialog extends RedisClientDialog {
 				if(name.length() == 0 || host.length() == 0 || port.length() == 0)
 					MessageDialog.openError(shell, RedisClient.i18nFile.getText(I18nFile.ERROR),RedisClient.i18nFile.getText(I18nFile.INPUTSERVER));
 				else {
-					result = new Server(0, name, host, port, password);
+					Server server = new Server(0, name, host, port, password);
+					server.setJedisClusterType(jedisClusterType.getSelection());
+					server.setJedisSentinelType(jedisSentinelType.getSelection());
+					result = server;
 					shell.dispose();
 				}
 					
@@ -114,6 +146,7 @@ public class AddServerDialog extends RedisClientDialog {
 			}
 		});
 		btnCancel.setText(RedisClient.i18nFile.getText(I18nFile.CANCEL));
+
 		super.createContents();
 	}
 

@@ -28,6 +28,8 @@ public class UpdateServerDialog extends AddServerDialog {
 			text_6.setText(server.getPassword());
 			text_6.selectAll();
 		}
+		jedisSentinelType.setSelection(server.isJedisSentinelType());
+		jedisClusterType.setSelection(server.isJedisClusterType());
 	}
 
 	@Override

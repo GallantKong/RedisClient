@@ -102,11 +102,7 @@
 				<swt.version>4.3</swt.version>
 				<swt.artifactId>org.eclipse.swt.win32.win32.x86</swt.artifactId>
 				<swt.groupId>org.eclipse.swt.org.eclipse.swt.win32.win32.x86.4.3.swt</swt.groupId>
-
 			</properties>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 		</profile>
 		<profile>
 			<id>win64</id>
@@ -116,6 +112,9 @@
 				<swt.artifactId>org.eclipse.swt.win32.win32.x86_64</swt.artifactId>
 				<swt.groupId>org.eclipse.swt.org.eclipse.swt.win32.win32.x86_64.4.3.swt</swt.groupId>
 			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 		</profile>
 
 		<profile>

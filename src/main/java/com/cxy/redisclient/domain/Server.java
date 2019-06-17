@@ -10,13 +10,15 @@ public class Server {
 		this.port = port;
 		this.password = password;
 	}
-	
+
 	private int id;
 	private String name;
 	private String host;
 	private String port;
 	private String password;
-		
+	private boolean isJedisClusterType;
+	private boolean isJedisSentinelType;
+
 	public int getId() {
 		return id;
 	}
@@ -46,5 +48,21 @@ public class Server {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Boolean isJedisClusterType() {
+		return isJedisClusterType;
+	}
+
+	public void setJedisClusterType(Boolean jedisClusterType) {
+		isJedisClusterType = jedisClusterType;
+	}
+
+	public Boolean isJedisSentinelType() {
+		return isJedisSentinelType;
+	}
+
+	public void setJedisSentinelType(Boolean jedisSentinelType) {
+		isJedisSentinelType = jedisSentinelType;
 	}
 }

@@ -13,6 +13,8 @@ public class ConfigFile extends PropertyFile {
 	public static final String NAME = "name";
 	public static final String PASSWORD = "password";
 	public static final String SERVER_MAXID = "server_maxid";
+	public static final String IS_SENTINEL = "is_sentinel";
+	public static final String IS_CLUSTER = "is_cluster";
 
 	public static final String FAVORITE = "favorite";
 	public static final String FAVORITE_NAME = "favorite_name";
