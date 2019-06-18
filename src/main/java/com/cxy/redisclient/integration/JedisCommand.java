@@ -18,10 +18,12 @@ public abstract class JedisCommand implements Comparable<JedisCommand>{
 	protected int id;
 	protected Server server;
 	protected Jedis jedis;
+	protected ServerService service = new ServerService();
 
 	public JedisCommand(int id) {
 		super();
 		this.id = id;
+		server = service.listById(id);
 	}
 
 	public void execute() {

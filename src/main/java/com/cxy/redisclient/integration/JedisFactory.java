@@ -39,7 +39,9 @@ public class JedisFactory {
         if(server.getPassword() != null && server.getPassword().length() > 0) {
             jedis.auth(server.getPassword());
         }
-        return jedis;
+        JedisProxy jedisProxy = new JedisProxy();
+        jedisProxy.setServer(server);
+        return (Jedis) jedisProxy.getInstance(jedis);
     }
 
     private static Jedis createJedis(Server server){

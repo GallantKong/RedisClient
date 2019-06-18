@@ -18,6 +18,7 @@
 		<slf4j.log4j.version>1.7.2</slf4j.log4j.version>
 		<gson.version>2.3</gson.version>
 		<dom4j.version>1.6.1</dom4j.version>
+		<cglib.version>2.2.2</cglib.version>
 	</properties>
 
 	<dependencies>
@@ -56,6 +57,11 @@
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
 			<version>${dom4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>${cglib.version}</version>
 		</dependency>
 	</dependencies>
 

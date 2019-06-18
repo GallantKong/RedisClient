@@ -199,7 +199,7 @@ public class RedisClient {
 	 * 
 	 */
 	public void open() {
-		Display display = null;
+		Display display;
 
 		display = Display.getDefault();
 		createContents();
@@ -2760,7 +2760,7 @@ public class RedisClient {
 		int amount = service1.listDBs((Integer) selectedItem.getData(NODE_ID));
 
 		if (selectedItem.getData(ITEM_OPENED) == null
-				|| ((Boolean) (selectedItem.getData(ITEM_OPENED)) == false)) {
+				|| !((Boolean) (selectedItem.getData(ITEM_OPENED)))) {
 			selectedItem.removeAll();
 
 			for (int i = 0; i < amount; i++) {
